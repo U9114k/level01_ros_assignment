@@ -1,0 +1,85 @@
+BUGS.txt
+
+BUGS IDENTIFIED AND FIXED IN THE STARTER REPOSITORY
+
+1. Incorrect Map Filename
+   File:
+   wrong_path_testbed_world.pgm
+
+   Issue:
+   The map YAML file referenced a non-existent PGM map file.
+
+   Fix:
+   Corrected the image reference to:
+   testbed_world.pgm
+
+
+2. Map Directory Not Installed
+   File:
+   testbed_bringup/CMakeLists.txt
+
+   Issue:
+   The maps directory was not included in the package installation rules.
+   As a result, the map files were not available from the installed package.
+
+   Fix:
+   Added the maps directory to the CMake install rules.
+
+
+3. Gazebo Models Directory Not Installed
+   File:
+   testbed_gazebo/CMakeLists.txt
+
+   Issue:
+   The models directory was not included in the package installation rules.
+
+   Fix:
+   Added the models directory to the CMake install rules.
+
+
+4. Malformed Gazebo XML
+   File:
+   testbed_description/urdf/testbed.gazebo
+
+   Issue:
+   The XML contained an extra '>' character in the
+   initial_orientation_as_reference tag.
+
+   Fix:
+   Removed the extra character and corrected the XML tag.
+
+
+5. Incorrect ament_package() Invocation
+   File:
+   testbed_description/CMakeLists.txt
+
+   Issue:
+   The package contained:
+   
+   ament_package
+
+   instead of the required CMake function invocation.
+
+   Fix:
+   Changed it to:
+
+   ament_package()
+
+
+6. Manual Nav2 Integration Configuration
+   Files:
+   testbed_navigation/launch/
+   testbed_navigation/config/
+
+   Issue:
+   The navigation stack had to be configured manually because the assignment
+   specifically required using individual Nav2 components instead of
+   nav2_bringup.
+
+   This required configuring the planner, controller, costmaps, BT Navigator,
+   behavior server, and lifecycle management components individually.
+
+   Fix:
+   Configured the required Nav2 servers and plugins explicitly and verified
+   that the navigation stack could transition to the active state and execute
+   navigation goals.
